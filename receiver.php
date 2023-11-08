@@ -1,17 +1,27 @@
+
+<?php
+    $data = $_COOKIE["output"];
+    echo $data;
+
+
+?>
+
 <!doctype html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Blood Donation</title>
+    <title>Donate Blood</title>
     <link rel="shortcut icon" href="assets/images/logo.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css?family=Merriweather&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/fontawsom-all.min.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
-    <link rel="stylesheet" href="styles/doante.css">
+    <link rel="stylesheet" href="styles/donate.css">
 </head>
+
+
 
 <body>
         <header class="continer-fluid ">
@@ -45,7 +55,7 @@
                                             <a class="nav-link" href="./donate.html">Donate Blood</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="">Recieve Blood</a>
+                                            <a class="nav-link" href="./recieve.html">Recieve Blood</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -60,38 +70,49 @@
 
 
         
-    <h1>Donor Information Form</h1>
-    <form action="process_form.php" method="post">
-        <label for="donor_id">Donor ID:</label>
-        <input type="text" id="donor_id" name="donor_id" required>
+            <h1>Recipient Information Form</h1>
+            <form action="process_recipient.php" method="post">
+                <label for="recipient_id">Recipient ID:</label>
+                <input type="text" id="recipient_id" name="recipient_id" required>
+        
+                <label for="first_name">First Name:</label>
+                <input type="text" id="first_name" name="first_name">
+        
+                <label for="last_name">Last Name:</label>
+                <input type="text" id="last_name" name="last_name">
+        
+                <label for="date_of_birth">Date of Birth:</label>
+                <input type="date" id="date_of_birth" name="date_of_birth">
+        
+                <label for="gender">Gender:</label>
+                <input type="text" id="gender" name="gender">
+        
+                <label for="contact_number">Contact Number:</label>
+                <input type="text" id="contact_number" name="contact_number">
+        
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email">
+        
+                <label for="city">City:</label>
+                <input type="text" id="city" name="city">
+        
+                <label for="blood-type">Blood Type:</label>
+                    <select id="blood-type" name="blood-type">
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B+">B-</option>
+                        <option value="B+">O+</option>
+                        <option value="B+">O-</option>
+                        <option value="B+">AB-</option>
+                    </select>
+        
+                <input type="submit" value="Submit" class="btn">
+            </form>
 
-        <label for="first_name">First Name:</label>
-        <input type="text" id="first_name" name="first_name">
 
-        <label for="last_name">Last Name:</label>
-        <input type="text" id="last_name" name="last_name">
-
-        <label for="date_of_birth">Date of Birth:</label>
-        <input type="date" id="date_of_birth" name="date_of_birth">
-
-        <label for="gender">Gender:</label>
-        <input type="text" id="gender" name="gender">
-
-        <label for="contact_number">Contact Number:</label>
-        <input type="text" id="contact_number" name="contact_number">
-
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email">
-
-        <label for="city">City:</label>
-        <input type="text" id="city" name="city">
-
-        <label for="blood_type">Blood Type:</label>
-        <input type="text" id="blood_type" name="blood_type">
-
-        <input type="submit" value="Submit">
-    </form>
 </div>
+
 
 
     </body>
