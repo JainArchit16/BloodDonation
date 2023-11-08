@@ -1,11 +1,4 @@
 
-<?php
-    $data = $_COOKIE["output"];
-    echo $data;
-
-
-?>
-
 <!doctype html>
 <html lang="en">
 
@@ -71,7 +64,7 @@
 
         
             <h1>Recipient Information Form</h1>
-            <form action="process_recipient.php" method="post">
+            <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                 <label for="recipient_id">Recipient ID:</label>
                 <input type="text" id="recipient_id" name="recipient_id" required>
         
@@ -107,11 +100,32 @@
                         <option value="B+">AB-</option>
                     </select>
         
-                <input type="submit" value="Submit" class="btn">
+                <input type="submit" value="Submit" class="btn" name="submit">
             </form>
 
 
 </div>
+<?php
+    error_reporting(0);
+    if (isset($_POST['submit'])) {
+        // Retrieve the form data
+        $function_to_call = "addReceiver"; 
+        $arguments = [$_POST['recipient_id'],$_POST['first_name'],$_POST['last_name'],$_POST['date_of_birth'],$_POST['gender'],$_POST['contact_number'],$_POST['email'],$_POST['city'],$_POST['blood-type']];
+        
+
+        $command = "python connector.py $function_to_call " . implode(" ", $arguments);
+        echo $command;
+        
+        // Run the Python script with the specified function and arguments and capture its output
+        $output = shell_exec($command);
+        
+        
+        
+        // Output the result
+       // echo $output;
+
+    }
+    ?>
 
 
 

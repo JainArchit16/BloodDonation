@@ -89,23 +89,44 @@
         <?php
     error_reporting(0);
     if (isset($_POST['submit'])) {
-        // Retrieve the form data
-        $function_to_call = "findDonorForRecipient"; 
-        $arguments = [$_POST['city'],$_POST['blood-type']];
+        //$function_to_call = "findDonorForRecipient"; 
+        //$arguments = [$_POST['city'],$_POST['blood-type']];
+        $blood_type = $_POST['blood-type'];
+        $city = $_POST['city'];
+        $conn = mysqli_connect("localhost","admin","admin","bloodbank");
+        //error_reporting(E_ERROR | E_PARSE);
+        $sql = " SELECT * FROM donor WHERE blood_type = '$blood_type' ORDER BY CASE WHEN city = '$city' THEN 0 ELSE 1 END, city;";
+        $output = mysqli_query($conn,$sql);
+
+        echo "<table>";
+while ($row = mysqli_fetch_assoc($output)) {
+    echo "<tr>";
+    // Access the data in each row
+    foreach($row as $item){
+        echo "<td>$item</td>";
+    }
+    echo "</tr>";
+}
+echo "</table>";
+        
         
 
-        $command = "python connector.py $function_to_call " . implode(" ", $arguments);
-        
-        
-        $output = shell_exec($command);
+        //$command = "python connector.py $function_to_call " . implode(" ", $arguments);
+        //$output = shell_exec($command);
         
         
         
         // Output the result
-       echo $output;
+    //echo $output;
 
     }
     ?>
+
+
+    
+
+
+
 
     </body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>

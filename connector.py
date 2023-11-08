@@ -31,6 +31,7 @@ def addDonor(donor_id, first_name, last_name, date_of_birth, gender, contact_num
     print(a)
     mycursor.close()
 
+
 def findDonorForRecipient( city , blood_type):
     mydb = mysql.connector.connect(host="localhost", user="admin", passwd="admin",
                                    auth_plugin='mysql_native_password')
@@ -46,6 +47,18 @@ def findDonorForRecipient( city , blood_type):
     mycursor.close()
 
 
+def addReceiver(donor_id, first_name, last_name, date_of_birth, gender, contact_number, email, city,blood_type):
+    mydb = mysql.connector.connect(host="localhost", user="admin", passwd="admin",
+                                   auth_plugin='mysql_native_password')
+    mycursor = mydb.cursor()
+    mycursor.execute("use bloodbank")
+
+    mycursor.execute(f"INSERT INTO recipient (recipient_id, first_name, last_name, date_of_birth, gender, contact_number, email, city, blood_type) VALUES ('{donor_id}', '{first_name}', '{last_name}', '{date_of_birth}', '{gender}', '{contact_number}', '{email}', '{city}', '{blood_type}')" )
+    a = mycursor.fetchone()
+    mydb.commit()
+
+    print(a)
+    mycursor.close()
 
 
 
@@ -85,8 +98,9 @@ elif function_name == "findDonorForRecipient":
     #print("Usage: python myscript.py function_two [arg1] [arg2] [arg3]")
     sys.exit(1)
     
-elif function_name == "hai":
-    hai()
+elif function_name == "addReceiver":
+    addReceiver(args[0],args[1],args[2],args[3],args[4],args[5],args[6],args[7],args[8])
+    sys.exit(1)
 else:
     print("Invalid function name")
     sys.exit(1)
