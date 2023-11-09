@@ -45,10 +45,13 @@
                                         </li>
                                        
                                         <li class="nav-item">
-                                            <a class="nav-link" href="./donate.html">Donate Blood</a>
+                                            <a class="nav-link" href="./donate.php">Donate Blood</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="./receive.php">Recieve Blood</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="./receiver.php">Register Reciever</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -65,32 +68,42 @@
         
             <h1>Recipient Information Form</h1>
             <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-                <label for="recipient_id">Recipient ID:</label>
-                <input type="text" id="recipient_id" name="recipient_id" required>
+                <!-- <label for="recipient_id">Recipient ID:</label>
+                <input type="text" id="recipient_id" name="recipient_id" required> -->
+
+                <label for="donor_id">Donor ID:</label>
+        <input type="text" id="donor_id" name="donor_id" required>
         
                 <label for="first_name">First Name:</label>
-                <input type="text" id="first_name" name="first_name">
+                <input type="text" id="first_name" name="first_name" required>
         
                 <label for="last_name">Last Name:</label>
-                <input type="text" id="last_name" name="last_name">
+                <input type="text" id="last_name" name="last_name" required>
         
                 <label for="date_of_birth">Date of Birth:</label>
-                <input type="date" id="date_of_birth" name="date_of_birth">
+                <input type="date" id="date_of_birth" name="date_of_birth" required>
         
                 <label for="gender">Gender:</label>
-                <input type="text" id="gender" name="gender">
+                <input type="text" id="gender" name="gender" required>
         
                 <label for="contact_number">Contact Number:</label>
-                <input type="text" id="contact_number" name="contact_number">
+                <input type="text" id="contact_number" name="contact_number"required>
         
                 <label for="email">Email:</label>
-                <input type="email" id="email" name="email">
+                <input type="email" id="email" name="email" required>
         
                 <label for="city">City:</label>
-                <input type="text" id="city" name="city">
+                <input type="text" id="city" name="city" required>
+
+                <label for="amount">Donation Amount Required:</label>
+        <input type="number" id="amount" name="amount" required>
+
+
+        <label for="center">Donation Center:</label>
+        <input type="text" id="center" name="center" required>
         
-                <label for="blood-type">Blood Type:</label>
-                    <select id="blood-type" name="blood-type">
+                <label for="blood-type">Blood Type Required:</label>
+                    <select id="blood-type" name="blood-type" required>
                         <option value="A+">A+</option>
                         <option value="A-">A-</option>
                         <option value="B+">B+</option>
@@ -100,7 +113,7 @@
                         <option value="B+">AB-</option>
                     </select>
         
-                <input type="submit" value="Submit" class="btn" name="submit">
+                <input type="submit" value="Submit" class="btn my-2" name="submit">
             </form>
 
 

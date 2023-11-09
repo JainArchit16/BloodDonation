@@ -19,10 +19,12 @@ def displayDonor(id):
 
 
 def addDonor(donor_id, first_name, last_name, date_of_birth, gender, contact_number, email, city,blood_type):
+    print("yahan tk aaayr")
     mydb = mysql.connector.connect(host="localhost", user="admin", passwd="admin",
                                    auth_plugin='mysql_native_password')
     mycursor = mydb.cursor()
     mycursor.execute("use bloodbank")
+    print()
 
     mycursor.execute(f"INSERT INTO donor (donor_id, first_name, last_name, date_of_birth, gender, contact_number, email, city, blood_type) VALUES ('{donor_id}', '{first_name}', '{last_name}', '{date_of_birth}', '{gender}', '{contact_number}', '{email}', '{city}', '{blood_type}')" )
     a = mycursor.fetchone()

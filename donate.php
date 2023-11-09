@@ -47,6 +47,9 @@
                                         <li class="nav-item">
                                             <a class="nav-link" href="./receive.php">Recieve Blood</a>
                                         </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="./receiver.php">Register Reciever</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </nav>
@@ -62,47 +65,59 @@
         
     <h1>Donor Information Form</h1>
     <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-        <label for="donor_id">Donor ID:</label>
-        <input type="text" id="donor_id" name="donor_id" required>
+        <!-- <label for="donor_id">Donor ID:</label>
+        <input type="text" id="donor_id" name="donor_id" required> -->
 
         <label for="first_name">First Name:</label>
-        <input type="text" id="first_name" name="first_name">
+        <input type="text" id="first_name" name="first_name" required>
 
         <label for="last_name">Last Name:</label>
-        <input type="text" id="last_name" name="last_name">
+        <input type="text" id="last_name" name="last_name" required>
 
         <label for="date_of_birth">Date of Birth:</label>
-        <input type="date" id="date_of_birth" name="date_of_birth">
+        <input type="date" id="date_of_birth" name="date_of_birth" required>
 
         <label for="gender">Gender:</label>
-        <input type="text" id="gender" name="gender">
+        <input type="text" id="gender" name="gender" required>
 
         <label for="contact_number">Contact Number:</label>
-        <input type="text" id="contact_number" name="contact_number">
+        <input type="text" id="contact_number" name="contact_number" required>
 
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email">
+        <input type="email" id="email" name="email" required>
 
         <label for="city">City:</label>
-        <input type="text" id="city" name="city">
+        <input type="text" id="city" name="city" required>
 
-        <label for="blood_type">Blood Type:</label>
-        <input type="text" id="blood_type" name="blood_type">
+        <label for="blood-type">Blood Type:</label>
+                    <select id="blood-type" name="blood-type" required>
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B+">B-</option>
+                        <option value="B+">O+</option>
+                        <option value="B+">O-</option>
+                        <option value="B+">AB-</option>
+                    </select>
 
         <input type="submit" value="Submit" name = "submit">
     </form>
 </div>
+
+
+<!-- Donor id khud bnani h pass nhi krni -->
+
 
 <?php
     error_reporting(0);
     if (isset($_POST['submit'])) {
         // Retrieve the form data
         $function_to_call = "addDonor"; 
-        $arguments = [$_POST['donor_id'],$_POST['first_name'],$_POST['last_name'],$_POST['date_of_birth'],$_POST['gender'],$_POST['contact_number'],$_POST['email'],$_POST['city'],$_POST['blood_type']];
+        $arguments = [$_POST['donor_id'],$_POST['first_name'],$_POST['last_name'],$_POST['date_of_birth'],$_POST['gender'],$_POST['contact_number'],$_POST['email'],$_POST['city'],$_POST['blood-type']];
         
 
         $command = "python connector.py $function_to_call " . implode(" ", $arguments);
-        echo $command;
+        // echo $command;
         
         // Run the Python script with the specified function and arguments and capture its output
         $output = shell_exec($command);
@@ -110,7 +125,9 @@
         
         
         // Output the result
-        echo $output;
+        // echo $output;
+        echo '<script>window.location.href = "./index.html"</script>';
+        echo '<script>alert("Donor registered successfully!");</script>';
 
     }
     ?>

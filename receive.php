@@ -42,10 +42,13 @@
                                         </li>
                                        
                                         <li class="nav-item">
-                                            <a class="nav-link" href="./donate.html">Donate Blood</a>
+                                            <a class="nav-link" href="./donate.php">Donate Blood</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="./receive.php">Recieve Blood</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="./receiver.php">Register Reciever</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -97,17 +100,30 @@
         //error_reporting(E_ERROR | E_PARSE);
         $sql = " SELECT * FROM donor WHERE blood_type = '$blood_type' ORDER BY CASE WHEN city = '$city' THEN 0 ELSE 1 END, city;";
         $output = mysqli_query($conn,$sql);
-
-        echo "<table>";
-while ($row = mysqli_fetch_assoc($output)) {
-    echo "<tr>";
-    // Access the data in each row
-    foreach($row as $item){
-        echo "<td>$item</td>";
-    }
-    echo "</tr>";
-}
-echo "</table>";
+        echo "<div class='p-5'>";
+        echo "<table class='table table-striped table-bordered my-5'>";
+        echo "<thead class='thead-dark'><tr>";
+        
+        // Output column headers
+        foreach (mysqli_fetch_fields($output) as $field) {
+            echo "<th>{$field->name}</th>";
+        }
+        
+        echo "</tr></thead><tbody>";
+        
+        while ($row = mysqli_fetch_assoc($output)) {
+            echo "<tr>";
+        
+            // Access the data in each row
+            foreach ($row as $item) {
+                echo "<td>$item</td>";
+            }
+        
+            echo "</tr>";
+        }
+        
+        echo "</tbody></table>";
+        echo "</div>";
         
         
 
