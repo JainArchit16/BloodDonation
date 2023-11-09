@@ -45,7 +45,7 @@
                                             <a class="nav-link" href="./donate.html">Donate Blood</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="./recieve.html">Recieve Blood</a>
+                                            <a class="nav-link" href="./receive.php">Recieve Blood</a>
                                         </li>
                                     </ul>
                                 </div>
