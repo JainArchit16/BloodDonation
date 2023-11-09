@@ -116,15 +116,20 @@
        <div class="container">
            <div class="row session-title">
                <h2>About Us</h2>
-               <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has</p>
+               <p>Saving Lives, One Drop at a Time</p>
            </div>
             <div class="row">
                 <div class="col-md-6 text">
-                    <h2>About Blood Doners</h2>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-                    <p> It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                    <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some formhumour, or randomised words which don't look even slightly believable. If you are going to use a passage. industry's standard dummy has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-                    <p>Industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+                    <h2>About Blood Donors</h2>
+                    <p>At Blood Donors, we are passionate about making a difference in the world 
+                        of healthcare through our Blood Donation Management System. Our mission is to connect donors,
+                         healthcare providers, and recipients in a seamless and efficient manner, ultimately saving lives and 
+                         promoting the spirit of giving. With years of experience and a dedicated team of professionals, we have 
+                         developed a cutting-edge platform that streamlines the entire blood donation process. We understand the 
+                         critical importance of timely and safe blood transfusions, and our system is designed to ensure that every
+                          drop of donated blood reaches those in need. Join us in our quest to create a world where no one 
+                          has to suffer due to a shortage of blood. Together,
+                         we can make a positive impact on countless lives, one donation at a time. Thank you for being a part of this vital mission.</p>
                 </div>
                 <div class="col-md-6 image">
                     <img src="assets/images/about.jpg" alt="">
@@ -133,7 +138,40 @@
        </div>
    </section>
     
-      
+
+   
+
+   <?php
+   error_reporting(0);
+  
+       $conn = mysqli_connect("localhost","admin","admin","bloodbank");
+       $sql = " SELECT * FROM blooddonation;";
+       $output = mysqli_query($conn,$sql);
+       echo "<div class='p-5'>";
+       echo "<table class='table table-striped table-bordered my-5'>";
+       echo "<thead class='thead-dark'><tr>";
+       
+       // Output column headers
+       foreach (mysqli_fetch_fields($output) as $field) {
+           echo "<th>{$field->name}</th>";
+       }
+       
+       echo "</tr></thead><tbody>";
+       
+       while ($row = mysqli_fetch_assoc($output)) {
+           echo "<tr>";
+       
+           // Access the data in each row
+           foreach ($row as $item) {
+               echo "<td>$item</td>";
+           }
+       
+           echo "</tr>";
+       }
+       
+       echo "</tbody></table>";
+       echo "</div>";
+   ?>
 
     
     
