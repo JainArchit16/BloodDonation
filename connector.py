@@ -18,7 +18,7 @@ def displayDonor(id):
     mycursor.close()
 
 
-def addDonor(donor_id, first_name, last_name, date_of_birth, gender, contact_number, email, city,blood_type):
+def addDonor(first_name, last_name, date_of_birth, gender, contact_number, email, city,blood_type):
     print("yahan tk aaayr")
     mydb = mysql.connector.connect(host="localhost", user="admin", passwd="admin",
                                    auth_plugin='mysql_native_password')
@@ -26,7 +26,7 @@ def addDonor(donor_id, first_name, last_name, date_of_birth, gender, contact_num
     mycursor.execute("use bloodbank")
     print()
 
-    mycursor.execute(f"INSERT INTO donor (donor_id, first_name, last_name, date_of_birth, gender, contact_number, email, city, blood_type) VALUES ('{donor_id}', '{first_name}', '{last_name}', '{date_of_birth}', '{gender}', '{contact_number}', '{email}', '{city}', '{blood_type}')" )
+    mycursor.execute(f"INSERT INTO donor (first_name, last_name, date_of_birth, gender, contact_number, email, city, blood_type) VALUES ('{first_name}', '{last_name}', '{date_of_birth}', '{gender}', '{contact_number}', '{email}', '{city}', '{blood_type}')" )
     a = mycursor.fetchone()
     mydb.commit()
 
@@ -49,13 +49,27 @@ def findDonorForRecipient( city , blood_type):
     mycursor.close()
 
 
-def addReceiver(donor_id, first_name, last_name, date_of_birth, gender, contact_number, email, city,blood_type):
+def addReceiver(first_name, last_name, date_of_birth, gender, contact_number, email, city,blood_type):
     mydb = mysql.connector.connect(host="localhost", user="admin", passwd="admin",
                                    auth_plugin='mysql_native_password')
     mycursor = mydb.cursor()
     mycursor.execute("use bloodbank")
 
-    mycursor.execute(f"INSERT INTO recipient (recipient_id, first_name, last_name, date_of_birth, gender, contact_number, email, city, blood_type) VALUES ('{donor_id}', '{first_name}', '{last_name}', '{date_of_birth}', '{gender}', '{contact_number}', '{email}', '{city}', '{blood_type}')" )
+    mycursor.execute(f"INSERT INTO recipient (first_name, last_name, date_of_birth, gender, contact_number, email, city, blood_type) VALUES ('{first_name}', '{last_name}', '{date_of_birth}', '{gender}', '{contact_number}', '{email}', '{city}', '{blood_type}')" )
+    a = mycursor.fetchone()
+    mydb.commit()
+
+    print(a)
+    mycursor.close()
+
+def addBloodDonation(donor_id , blood_type , donation_amount , donation_center ):
+
+    mydb = mysql.connector.connect(host="localhost", user="admin", passwd="admin",
+                                   auth_plugin='mysql_native_password')
+    mycursor = mydb.cursor()
+    mycursor.execute("use bloodbank")
+
+    mycursor.execute(f"INSERT INTO blooddonation (donor_id, recipient_id, donation_date, blood_type, donation_amount, donation_center) VALUES ('{donor_id}' , (SELECT recipient_id FROM recipient ORDER BY recipient_id DESC LIMIT 1) , CURRENT_DATE , '{blood_type}' , '{donation_amount}' , '{donation_center}');")
     a = mycursor.fetchone()
     mydb.commit()
 
@@ -90,7 +104,7 @@ if function_name == "displayDonor":
     #result = function_one(args[0], args[1])
 elif function_name == "addDonor":
     
-    addDonor(args[0],args[1],args[2],args[3],args[4],args[5],args[6],args[7],args[8])
+    addDonor(args[0],args[1],args[2],args[3],args[4],args[5],args[6],args[7])
     #print("Usage: python myscript.py function_two [arg1] [arg2] [arg3]")
     sys.exit(1)
 #result = function_two(args[0], args[1], args[2])
@@ -101,7 +115,10 @@ elif function_name == "findDonorForRecipient":
     sys.exit(1)
     
 elif function_name == "addReceiver":
-    addReceiver(args[0],args[1],args[2],args[3],args[4],args[5],args[6],args[7],args[8])
+    addReceiver(args[0],args[1],args[2],args[3],args[4],args[5],args[6],args[7])
+    sys.exit(1)
+elif function_name == "addBloodDonation":
+    addBloodDonation(args[0],args[1],args[2],args[3])
     sys.exit(1)
 else:
     print("Invalid function name")

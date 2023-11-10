@@ -73,10 +73,10 @@
                         <option value="A+">A+</option>
                         <option value="A-">A-</option>
                         <option value="B+">B+</option>
-                        <option value="B+">B-</option>
-                        <option value="B+">O+</option>
-                        <option value="B+">O-</option>
-                        <option value="B+">AB-</option>
+                        <option value="B-">B-</option>
+                        <option value="O+">O+</option>
+                        <option value="O-">O-</option>
+                        <option value="AB-">AB-</option>
                     </select>
 
                 </div>

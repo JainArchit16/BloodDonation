@@ -94,10 +94,10 @@
                         <option value="A+">A+</option>
                         <option value="A-">A-</option>
                         <option value="B+">B+</option>
-                        <option value="B+">B-</option>
-                        <option value="B+">O+</option>
-                        <option value="B+">O-</option>
-                        <option value="B+">AB-</option>
+                        <option value="B-">B-</option>
+                        <option value="O+">O+</option>
+                        <option value="O-">O-</option>
+                        <option value="AB-">AB-</option>
                     </select>
 
         <input type="submit" value="Submit" name = "submit">
@@ -113,7 +113,7 @@
     if (isset($_POST['submit'])) {
         // Retrieve the form data
         $function_to_call = "addDonor"; 
-        $arguments = [$_POST['donor_id'],$_POST['first_name'],$_POST['last_name'],$_POST['date_of_birth'],$_POST['gender'],$_POST['contact_number'],$_POST['email'],$_POST['city'],$_POST['blood-type']];
+        $arguments = [$_POST['first_name'],$_POST['last_name'],$_POST['date_of_birth'],$_POST['gender'],$_POST['contact_number'],$_POST['email'],$_POST['city'],$_POST['blood-type']];
         
 
         $command = "python connector.py $function_to_call " . implode(" ", $arguments);
@@ -126,7 +126,7 @@
         
         // Output the result
         // echo $output;
-        echo '<script>window.location.href = "./index.html"</script>';
+        echo '<script>window.location.href = "./index.php"</script>';
         echo '<script>alert("Donor registered successfully!");</script>';
 
     }
